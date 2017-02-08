@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=0">
+</head>
+<style>
+	body,html{
+		height:100%;
+	}
+	body{
+		margin:0
+	}
+	ul,li{
+		margin:0;
+		padding:0;
+		list-style:none;
+	}
+	.xxk{
+		width:100%;
+		height:50px;
+		position:absolute;
+		bottom:0;
+	}
+	.xxk div{
+		height:100%;
+		width:33.3333%;
+		float: left;
+		text-align: center;
+		line-height:50px;
+		font-size:20px;
+		background:#333;
+		box-sizing:border-box;
+		border-left:1px solid #abcdef;
+		color:#fff;
+		z-index:111;
+	}
+	.xxk-box{
+		position:absolute;
+		top:0;
+		width:100%;
+		overflow:hidden;
+	}
+	.xxk-box ul{
+		height:100%;
+		width:300%;
+		transition:transform .4s ease-out;
+	}
+	.xxk-box ul li{
+		height:100%;
+		width:33.333333333%;
+		font-size:100px;
+		float:left;
+		text-align: center;
+		line-height:667px;
+		color: #fff;
+	}
+	.xxk .active{
+		background: #abcdef;
+	}
+</style>
+<body>
+	<div class="xxk-box">
+		<ul class="xxl">
+			<li style="background:green">1</li>
+			<li style="background:blue">2</li>
+			<li style="background:yellow">3</li>
+		</ul>		
+	</div>
+	<div class="xxk">
+		<div class="active">1</div>
+		<div>2</div>
+		<div>3</div>
+	</div>
+</body>
+<script>
+	// 选项卡效果
+	var uls=document.querySelector('.xxl');
+	var clientHeight=document.documentElement.clientHeight;
+	var btns=document.querySelectorAll('.xxk div');
+	var offsetHeight=btns[0].offsetHeight;
+	var xxl=document.querySelector(".xxl");
+	var xxk=document.querySelectorAll(".xxk div");
+	xxl.style.height=clientHeight-offsetHeight+"px";
+	
+	for (var i = 0; i < btns.length; i++) {
+		btns[i].index=i;
+		btns[i].addEventListener('touchstart',function(){
+			var l=-(this.index*33.33333)+"%";
+			uls.style.transform="translateX("+l+")";
+			for (var j = 0; j < xxk.length; j++) {
+				xxk[j].className="";
+			};
+			xxk[this.index].className="active";
+		})
+	};
+</script>
+</html>
